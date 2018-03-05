@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta charset="UTF-8" />
+    <title>漂亮的用户答题情况</title>
+</head>
+<body>
+<h1 align="center">漂亮的用户答题情况</h1>
+<div align="center">
+<form method="post" action="/searchstuquestion">　
+    搜索：<input type="search" name="questionwords" placeholder="请输入您要搜索的关键字或题目id" style="width: 450px;height: 30px"/>
+</form>
+</div>
+<br>
+<table align="center" border="1px" cellpadding="0" cellspacing="0" >
+    <tr><td id="qid">题目id</td><td id="question" width="1200px" align="center">题目</td><td align="center">得分</td></tr>
+    <tr th:each="q : ${qlist}"><td th:text="${q.qid}" align="center"></td><td><a th:text="${q.qtext}" th:href="${q.over}?'/viewUanswer?qid='+${q.qid}+'&uid='+${uid}:'javascript:alert(\'学生尚未作答\');'" th:style="${q.over}?(${q.score==400}?'color:red;text-decoration: none;':'color:green;text-decoration: none;'):'color:black;text-decoration: none;'"></a></td><td th:text="${q.over}? (${q.score==400}?'未打分':${q.score}):'未作答'" align="center"></td></tr>
+</table>
+<div align="center" ><a th:href="@{/answerQuestionList(page=${page-1})}">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/answerQuestionList(page=${page+1})}" >下一页</a></div>
+<input type="hidden" th:value="${page}">
+<div align="center"><span th:text="${info}" style="color: red;"></span></div>
+<img src="/image/home.jpg" style="position: absolute;top: 10px;left: 10px" onmouseover="javascript:window.location='/gohome';"/>
+</body>
+</html>

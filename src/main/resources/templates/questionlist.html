@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta charset="UTF-8" />
+    <title>漂亮的题目列表</title>
+</head>
+<body>
+<h1 align="center">漂亮的题目列表</h1>
+<div align="center">
+<form method="post" action="/searchquestion">　
+    搜索：<input type="search" name="questionwords" placeholder="请输入您要搜索的关键字或题目id" style="width: 450px;height: 30px"/>
+    <a href="/addQuestion" style="color: darkred;position: relative;left: 150px;"><b><i>点我出题</i></b></a>
+</form>
+</div>
+<br>
+<table align="center" border="1px" cellpadding="0" cellspacing="0" >
+    <tr><td id="qid">题目id</td><td id="question" width="700px" align="center">题目</td><td id="answer" width="700px" align="center">答案</td></tr>
+    <tr th:each="q : ${qlist}"><td th:text="${q.qid}" align="center"></td><td><a th:text="${q.qtext}" th:href="@{/getQuestion(qid=${q.qid})}"></a></td><td th:text="${q.answer}"></td></tr>
+</table>
+<div align="center" ><a th:href="@{/questionList(page=${page-1})}">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/questionList(page=${page+1})}" >下一页</a></div>
+<input type="hidden" th:value="${page}">
+<div align="center"><span th:text="${info}" style="color: red;"></span></div>
+<img src="/image/home.jpg" style="position: absolute;top: 10px;left: 10px" onmouseover="javascript:window.location='/gohome';"/>
+</body>
+</html>

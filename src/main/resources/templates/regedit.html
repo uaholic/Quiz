@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta charset="UTF-8" />
+    <title>漂亮的注册页</title>
+    <style type="text/css">
+        #mark{
+            text-align-last:justify
+        }
+    </style>
+    <script type="text/javascript">
+        function oncommit(){
+            return (checkname()&&checkpassword());
+        }
+        function checkname(){
+            var ok=false;
+            var name=document.regform.name.value;
+            var nameinfo=document.getElementById("nameinfo");
+            var exp=new RegExp("^[\u4e00-\u9fa5]+$");
+            if(!exp.test(name)){
+                nameinfo.innerHTML="难道阁下不是中国人嘛";
+                return ok;
+            }else{
+                if(name.length>3){
+                    nameinfo.innerHTML="咱班没有这么长的名字";
+                    return ok;
+                }else{
+                    nameinfo.innerHTML="&nbsp;";
+                }
+            }
+            return true;
+        }
+        function checkpassword(){
+            var ok=false;
+            var p1=document.regform.password.value;
+            var p2=document.regform.conpassword.value;
+            var passwordinfo=document.getElementById("passwordinfo");
+            if(p1!=p2){
+                passwordinfo.innerHTML="两次输入的密码不一致";
+                return ok;
+            }else{
+                passwordinfo.innerHTML="&nbsp;";
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+<h1 align="center">漂亮的注册页</h1>
+<br><h3 style="color: red" th:text="${errinfo}"></h3><br>
+<div>
+    <table align="center">
+        <form name="regform" method="post" action="/regedit" onsubmit="return oncommit();">
+            <tr><td style="color: red">*</td><td id="mark">姓名</td><td><input type="text" name="name" onblur="checkname();"></td></tr>
+            <tr><td></td><td></td><td id="nameinfo" style="color: red">&nbsp;</td></tr>
+            <tr><td style="color: red">*</td><td id="mark">用户名</td><td><input type="text" name="username"></td></tr>
+            <tr><td></td><td></td><td id="usernameinfo" style="color: red">&nbsp;</td></tr>
+            <tr><td style="color: red">*</td><td id="mark">密码</td><td><input type="password" name="password"></td></tr>
+            <tr><td></td><td></td><td id="passinfo" style="color: red">&nbsp;</td></tr>
+            <tr><td style="color: red">*</td><td id="mark">确认密码</td><td><input type="password" name="conpassword" onblur="checkpassword();"></td></tr>
+            <tr><td></td><td></td><td id="passwordinfo" style="color: red">&nbsp;</td></tr>
+            <tr><td></td><td></td><td><div style="float: left;"><input type="reset" value="重置"></div><div style="float:right;"><input type="submit" value="提交"></div></td></tr>
+        </form>
+    </table>
+</div>
+</body>
+</html>

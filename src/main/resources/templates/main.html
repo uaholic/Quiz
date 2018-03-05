@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>漂亮的主页面</title>
+    <script th:inline="javascript">
+        var index=0;
+        function rolltext(len){
+            var s2=/*[[${name}]]*/"";
+            var s="      "+s2+'您好    答题请拨 1；修改密码请拨 2；参考答案请拨 3；管理员登录请拨 4；退出登录请拨 5；   For English service please press  9......；      ';
+            var sl=s.length;
+            var context="";
+            if(index+len<=sl){
+                context=s.substring(index,index+len);
+            }else{
+                context=s.substring(index,sl)+s.substring(0,index+len-sl);
+            }
+            document.getElementById("info").innerHTML=context;
+            if(index>=sl){
+                index=0;
+            }else{
+                index=index+1;
+            }
+        }
+        setInterval("rolltext(15)","300");
+        function nine(){
+            alert("真抱歉劳资不会英语.");
+        }
+        function four() {
+            var author=document.getElementById("author").value;
+            if(author==0){
+                alert("小P民操什么管理员的心");
+            }else if(author==1){
+                window.location="/admin";
+            }
+        }
+        function five() {
+            window.location="/";
+        }
+        function two() {
+            window.location="/gotochangepassword";
+        }
+        function one() {
+            window.location="/answerQuestionList"
+        }
+        function three() {
+            window.location="/stuViewAnswer";
+        }
+    </script>
+</head>
+<body>
+<h1 align="center">这是一个漂亮的主页</h1>
+<div id="info" align="center"> </div>
+<div align="center">
+    <table>
+        <tr>
+            <td>
+                <button style="height: 40px;width: 30px" onclick="one();">1</button>
+            </td>
+            <td>
+                <button style="height: 40px;width: 30px" onclick="two();">2</button>
+            </td>
+            <td>
+                <button style="height: 40px;width: 30px" onclick="three();">3</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button style="height: 40px;width: 30px" onclick="four();">4</button>
+            </td>
+            <td>
+                <button style="height: 40px;width: 30px" onclick="five();">5</button>
+            </td>
+            <td>
+                <button style="height: 40px;width: 30px">6</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button style="height: 40px;width: 30px">7</button>
+            </td>
+            <td>
+                <button style="height: 40px;width: 30px">8</button>
+            </td>
+            <td>
+                <button style="height: 40px;width: 30px" onclick="nine();">9</button>
+            </td>
+        </tr>
+    </table>
+    <input id="author" type="hidden" th:value="${author}">
+</div>
+</body>
+</html>

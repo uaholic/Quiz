@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>漂亮的判卷页面</title>
+    <style type="text/css">
+        #mark{
+            text-align-last:justify;
+        }
+        #question,#answerdiv{
+            width: 1000px;
+            height: 300px;
+            border: 1px solid;
+            overflow: auto;
+        }
+    </style>
+    <script type="text/javascript">
+        function updatescore(){
+            var score = prompt("请输入分数:","");
+            var exp=new RegExp("^[0-9]{1,3}$");
+            if(score!=null){
+                if(exp.test(score)&&score<=100&&score>=0){
+                    document.score.score.value=score;
+                    document.score.submit();
+                }else{
+                    alert("分数格式有误");
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<h1 align="center">漂亮的判卷页面</h1>
+<a href="javascript:updatescore();" style="color: darkred;position: relative;left: 450px;"><b><i>评分</i></b></a>
+<table>
+    <tr>
+        <td id="mark">
+            题目id：
+        </td>
+        <td th:text="${qid}">
+
+        </td>
+    </tr>
+    <tr>
+        <td id="mark">
+            题目内容：
+        </td>
+        <td>
+            <div id="question" th:utext="${question}">
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td id="mark">
+            学生答案：
+        </td>
+        <td>
+            <div id="answerdiv" th:utext="${uanswer}" >
+
+            </div>
+        </td>
+    </tr>
+
+</table>
+<form action="/updateScore" method="post" name="score">
+    <input type="hidden" name="qid" th:value="${qid}">
+    <input type="hidden" name="uid" th:value="${uid}">
+    <input type="hidden" name="score" >
+    <input type="hidden" name="answer" th:value="${answer}">
+    <input type="hidden" name="question" th:value="${question}">
+</form>
+<div style="width: 300px;height: 600px;float: right;border: 1px solid;position: absolute;right: 100px;top: 136px;overflow: auto;">
+    <h3 align="center">作答情况</h3>
+    <table th:each="na : ${nabeans}" align="center">
+        <tr><td align="center" width="100px">
+
+            <a th:href="${na.over}? '/viewUanswer?qid='+${qid}+'&uid='+${na.uid}:'javascript:alert(\'学生尚未作答\');'" th:text="${na.name}" th:style="${na.over}?(${na.score==400}?'color:red;text-decoration: none;':'color:green;text-decoration: none;'):'color:black;text-decoration: none;'"></a>
+
+        </td><td th:text="${na.over}?(${na.score==400}?'未评分':${na.score}+'分'):'未作答'" align="center" width="100px"></td>
+        </tr>
+    </table>
+</div>
+<img src="/image/home.jpg" style="position: absolute;top: 2px;left: 10px" onmouseover="javascript:window.location='/gohome';"/>
+</body>
+</html>

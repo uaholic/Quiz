@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta charset="UTF-8" />
+    <title>漂亮的学生列表</title>
+</head>
+<body>
+<h1 align="center">漂亮的学生列表</h1>
+<div align="center">
+    <form method="post" action="/searchuser">　
+        搜索：<input type="search" name="userwords" placeholder="请输入您要搜索的关键字或学生id" style="width: 450px;height: 30px"/>
+    </form>
+</div>
+<br>
+<table align="center" border="1px" cellpadding="0" cellspacing="0" >
+    <tr><td id="uid">学生id</td><td id="name" width="500px" align="center">学生姓名</td><td id="username" width="500px" align="center">用户名</td></tr>
+    <tr th:each="u : ${ulist}"><td th:text="${u.uid}" align="center"></td><td align="center"><a th:text="${u.name}" th:href="@{/getUser(uid=${u.uid})}"></a></td><td th:text="${u.username}" align="center"></td></tr>
+</table>
+<div align="center" ><a th:href="@{/studentList(page=${page-1})}">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/studentList(page=${page+1})}" >下一页</a></div>
+<input type="hidden" th:value="${page}">
+<img src="/image/home.jpg" style="position: absolute;top: 10px;left: 10px" onmouseover="javascript:window.location='/gohome';"/>
+</body>
+</html>

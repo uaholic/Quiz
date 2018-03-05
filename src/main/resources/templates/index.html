@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta charset="UTF-8" />
+    <title>漂亮的首页</title>
+</head>
+<body>
+<h1 th:text="${host}" align="center">Hello World</h1>
+<br><br>
+<div align="center">
+        <img src="/image/wulian.png"/>
+    <table>
+        <form action="/login" method="post">
+        <tr>
+            <td>账号:</td>
+            <td><input type="text" name="username"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>密码:</td>
+            <td><input type="password" name="password"></td>
+            <td><span style="color: red" th:text="${info}"></span></td>
+        </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="登录"><div style="float: right"><a href="/gotoreg">注册</a></div></td>
+            </tr>
+        </form>
+    </table>
+   <!-- <div style="position: relative;top: 10px;left: 10px;height: 300px;width: 400px">
+
+            <div style="position: absolute;top: 200px;left: 200px;height: 20px;width: 40px">账号:</div>
+            <div style="display: inline"><input type="text"></div>
+            <div>密码:</div>
+            <div style="display: inline"><input type="password"><br></div>
+            <div><input type="submit" value="登录"></div><div style="float: right"><a href="/regedit">注册</a></div>
+
+    </div>-->
+</div>
+</body>
+</html>

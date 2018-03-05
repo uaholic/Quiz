@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>漂亮的参考答案页面</title>
+    <style type="text/css">
+        #mark{
+            text-align-last:justify;
+        }
+        #question,#answerdiv{
+            width: 1000px;
+            height: 300px;
+            border: 1px solid;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body onload="hiddenanswer();">
+<h1 align="center">漂亮的参考答案页面</h1>
+<table align="center">
+    <tr>
+        <td id="mark">
+            题目id：
+        </td>
+        <td th:text="${qid}">
+
+        </td>
+    </tr>
+    <tr>
+        <td id="mark">
+            题目：
+        </td>
+        <td>
+            <div id="question" th:utext="${question}">
+
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td id="mark">
+            参考答案：
+        </td>
+        <td>
+            <div id="answerdiv" th:utext="${answer}" >
+
+            </div>
+        </td>
+    </tr>
+
+</table>
+<img src="/image/home.jpg" style="position: absolute;top: 10px;left: 10px" onmouseover="javascript:window.location='/gohome';"/>
+</body>
+</html>
